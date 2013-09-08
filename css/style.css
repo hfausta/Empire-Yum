@@ -1,0 +1,167 @@
+body {
+	font-size: 16px;
+	padding: 0;
+	margin: 0;
+	font-family:Helvettica,Arial,sans-serif;
+	text-rendering: optimizeLegibility;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto 0 auto;
+}
+
+#home-container hgroup {
+	text-align: center;
+}
+
+#home-container hgroup h1 {
+	font-size: 3em;
+	font-weight: 900 !important;
+	text-transform: uppercase;
+	font-family: "Arial Black", Arial, sans-serif;
+}
+
+#home-container hgroup h2 {
+	font-size: 2em;
+	font-weight: 600 !important;
+	text-transform: uppercase;
+	font-family: "Arial Black", Arial, sans-serif;
+}
+
+#home-container {
+	margin: 100px auto 0 auto;
+}
+
+#login {
+	text-align: left;
+	margin: 50px auto 50px auto;
+	padding: 50px 50px 50px 50px;
+	max-width: 600px;
+	background: #334145;
+	color: white;
+}
+
+input {
+	height: 40px;
+}
+
+input, select {
+	width: 100%;
+	margin: 0 0 25px 0;
+}
+
+#advanced {
+	margin-top: 20px;
+}
+
+select {
+	padding: 11px 0 11px 0;
+}
+
+input#location {
+	width: 91%;
+}
+
+.range-slider {
+	margin-bottom: 20px;
+}
+
+label {
+	font-weight: 900;
+	font-size: 1.5em;
+	text-transform: uppercase;
+}
+
+button.sign-in, button.submit-search, button.more-options {
+	border: none;
+	width: 100%;
+	font-weight: 900;
+	text-transform: uppercase;
+	font-family: "Arial Black", Arial, sans-serif;
+	font-size: 1.5em;
+	height: 2em;
+}
+
+button.sign-in {
+	margin: 25px 0 25px 0;
+}
+
+button.submit-search {
+	margin: 20px 0 20px 0;
+}
+
+footer .container {
+	min-height: 2em;
+	max-width: 940px;
+}
+
+nav.navbar {
+	border-radius: 0;
+	background: #334145;
+}
+
+.navbar-header {
+	padding: 0;
+}
+
+.navbar-brand {
+	font-size: 1.5em;
+	font-weight: 900;
+	text-transform: uppercase;
+	color:  #009fda !important;
+}
+
+.navbar-brand:hover {
+	color: white !important;
+}
+
+nav ul li a {
+	font-size: 1.2em;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: white !important;
+}
+
+nav ul li a:hover {
+	color: #009fda !important;
+}
+
+nav ul {
+	list-style-type: none;
+	margin: 0;
+}
+
+footer nav.footer {
+	float: left;
+}
+
+footer nav ul {
+	padding: 0;
+}
+
+footer nav ul li {
+	display: inline;
+	line-height: 60px;
+}
+
+footer nav ul li a {
+	font-weight: normal;
+	text-decoration: none;
+	line-height: 80px;
+	color: #334145 !important;
+}
+
+footer nav ul li a:hover {
+	text-decoration: none;
+	color: #009fda !important;
+}
+
+.social {
+	float: right;
+	line-height: 80px;
+}
+
+.ui-widget-header {
+	background: #009fda !important;
+}
