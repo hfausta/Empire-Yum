@@ -78,7 +78,7 @@
 										<option value="vietnamese">Vietnamese</option>
 									</select>
 									<label>Price Range</label>
-									<input type="text" name="price" id="price" value="Most affordable - Most expensive" readonly />
+									<input type="text" name="price" id="price" value="Free - Most expensive" readonly />
 									<div id="price-range" class="range-slider"></div>
 									<label>Search Radius</label>
 									<input type="text" name="radius" id="radius" onchange="updateRadiusValue(this.value);" value="10 Km" /><span id="radiusValue"></span> 
@@ -128,17 +128,18 @@
 			
 			$(function() {
 				var priceRange = {
-												0: "Most affordable",
-												25: "Affordable",
-												50: "Expensive",
-												75: "Most expensive"
+												0: "Free",
+												25: "Most affordable",
+												50: "Affordable",
+												75: "Expensive",
+												100: "Most expensive"
 											};
 				$("#price-range").slider({
 				range: true,
 				min: 0,
-				max: 75,
+				max: 100,
 				step: 25,
-				values: [ 0, 75 ],
+				values: [ 0, 100 ],
 				slide: function( event, ui ) {
 					if(ui.values[0] == ui.values[1]) {
 						$( "#price" ).val( priceRange[ui.values[ 0]]);
@@ -152,7 +153,7 @@
 			
 			$(function() {
 				$("#radius-range").slider({
-				min: 0,
+				min: 1,
 				max: 50,
 				value: 10,
 				step: 1,
