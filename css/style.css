@@ -8,6 +8,7 @@ body {
 
 #map-canvas {
 	display: block;
+	margin-top: 8px;
 	height: 600px;
 	width: 100%;
 	overflow: hidden;
@@ -193,4 +194,11 @@ footer nav ul li a:hover {
 
 .ui-widget-header {
 	background: #009fda !important;
+}
+
+@media all and (min-width: 990px) and (max-width: 1155px) {
+	
+	button, label {
+		font-size: 1.2em !important;
+	}
 }
