@@ -194,3 +194,15 @@ footer nav ul li a:hover {
 .ui-widget-header {
 	background: #009fda !important;
 }
+
+#map-canvas{
+	width: 100%;
+	height: 650px;
+	margin: 0;
+	border:1px solid;
+}
+
+#map{
+	width: 100%;
+	height: 100%;
+}
