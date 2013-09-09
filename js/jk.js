@@ -5,16 +5,16 @@
 	var markersArray = [];	//will be used for storing markers for referencing purpose
 	var service;
 	var myPos;
-	var advance;
+	var advance = false;
 /*======================================================= !global varibles =======================================================*/
 
 
 $(document).ready(function(event) {
 	
 	//Bind the submit event for the form to perform a text search, default behaviour will be prevented so page will not refresh
-	$('#searchForm').on('submit', function(event) {
+	$('#form').on('submit', function(event) {
 		event.preventDefault();
-		textSearch();
+		search();
 	});
 	
 	//Toggle search options, this sets a variable
@@ -75,18 +75,16 @@ function search(){
 					service = new google.maps.places.PlacesService(map);
 				}
 				// pass the request
-				if(!advanced){
+				if(!advance){
 					service.textSearch(request, callback);
 				}else{
 					service.nearbySearch(request, callback);
 				}  
-			},function() {
-				handleNoGeolocation(true);
-			}
+			},showError
 		);
 	}else{
 		// Browser does not support Geolocation
-		handleNoGeolocation(false)
+		handleNoGeolocation(false);
 	}		     
 }
 
@@ -94,36 +92,28 @@ function search(){
  * returns the a request object accroding to user input
  */
 function getRequest(){
-	var advanced = document.getElementById('advanced').checked;
-	var minprice;
-	if(document.getElementById('address')){
-		minprice = document.getElementById('address').value;
-	}
 	var query = 'food';
 	if(document.getElementById('keyword').value != ''){
 		query = document.getElementById('keyword').value+' '+query;
 	}
-	if(document.getElementById('cuisine').value != ''){
-		query = document.getElementById('cuisine').value+' '+query;
-	}
 	var types = ['bakery','food','bar','cafe','meal_delivery','meal_takeaway','night_club','restaurant'];
 	
-	var opennow = document.getElementById('opennow').checked;
+
 	var request;
-	if(!advanced){
-		var location = myPos;
-		var radius = '500';
+	if(!advance){
 		request = {
-		location: location,
-		radius: radius,
+		location: myPos,
+		radius: '500',
 		query: query,
 		types: types,
-		openNow: opennow,
-		minprice: minprice
 		};
 	}else{
-		var location = minprice = document.getElementById('address').value;
-		var radius = minprice = document.getElementById('radius').value;;
+		var location = document.getElementById('location').value;
+		var radius = document.getElementById('radius').value;;
+		if(document.getElementById('cuisine').value != ''){
+			query = document.getElementById('cuisine').value+' '+query;
+		}
+			var opennow = document.getElementById('opennow').checked;
 		request = {
 		location: location,
 		radius: radius,
