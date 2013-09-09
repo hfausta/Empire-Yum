@@ -22,7 +22,6 @@ $(document).ready(function() {
  * create a marker indicates current location of user
  * Default map type: ROADMAP
  * Default zoom level: 17
- * written by Daisy
  */
 function initialize() {
 	infowindow = new google.maps.InfoWindow();
@@ -183,7 +182,6 @@ function drawMyMarker(){
 /*
  * Create an individual marker on the map, then 
  * store the marker in an array for referencing purpose
- * written by Daisy
 */
 function createMarker(place,index) {
 	<!--- Create a marker on the map--->
