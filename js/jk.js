@@ -113,7 +113,23 @@ function getRequest(){
 		if(document.getElementById('cuisine').value != ''){
 			query = document.getElementById('cuisine').value+' '+query;
 		}
-			var opennow = document.getElementById('opennow').checked;
+		
+		switch(document.getElementById('cuisine').value) {
+			case error.PERMISSION_DENIED:
+			infowindow.setContent("User denied the request for Geolocation.");
+			break;
+			case error.POSITION_UNAVAILABLE:
+			infowindow.setContent("Location information is unavailable.");
+			break;
+			case error.TIMEOUT:
+			infowindow.setContent("The request to get user location timed out.");
+
+			break;
+			case error.UNKNOWN_ERROR:
+			infowindow.setContent("An unknown error occurred.");
+			break;
+		}
+		var opennow = document.getElementById('opennow').checked;
 		request = {
 		location: location,
 		radius: radius,
