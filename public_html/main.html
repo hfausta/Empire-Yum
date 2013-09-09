@@ -43,11 +43,9 @@
 							<div class="search-form">
 								<label>Search for food</label><input name="username" type="text" placeholder="" class="search-input" required />
 								<button type="button" class="more-options" id="advance">More Options<i class="glyphicon glyphicon-chevron-down"></i></button>
-                 
 								<div id="advanced">
-									<label>Location</label>
+									<label>Location</label><button type="button" class="btn btn-small" id="myLocationBtn" style="margin-left: 30px"><i class="icon-location-arrow"></i></button>
 									<input type="text" class="input" placeholder="Location" id="location">
-									<button type="button" class="btn btn-small" id="myLocationBtn"><i class="icon-location-arrow"></i></button>
 									<label>Cuisine Type</label>
 									<select id="cuisine">
 										<option value="">Cuisine Type</option>
@@ -74,18 +72,18 @@
 										<option value="vietnamese">Vietnamese</option>
 									</select>
 									<label>Price Range</label>
-									<input type="text" name="price" id="price" />
+									<input type="text" name="price" id="price" value="Affordable - Expensive" readonly />
 									<div id="price-range" class="range-slider"></div>
 									<label>Search Radius</label>
 									<input type="text" name="radius" id="radius" onchange="updateRadiusValue(this.value);" value="10 Km" /><span id="radiusValue"></span> 
 									<div id="radius-range" class="range-slider"></div>
-									<label>Rating</label>
+									<!--<label>Rating</label>
 									<input type="text" name="rating" id="rating" onchange="updateRatingValue(this.value);" value="0"/><span id="ratingValue"></span>
-									<div id="rating-range" class="range-slider"></div>
+									<div id="rating-range" class="range-slider"></div>-->
 									<label style="width: 95%">Open Today</label><input type="checkbox" name="openToday" value="openToday" style="width: 5%; height: 15px"><br>
-									<label style="width: 75%">Match</label>                  
+									<!--<label style="width: 75%">Match</label>                  
 									Any<input type="radio" name="match" id="matchAny" style="width: 5%; height: 15px" checked /> 
-									All<input type="radio" name="match" id="matchAll" style="width: 5%; height: 15px"> 
+									All<input type="radio" name="match" id="matchAll" style="width: 5%; height: 15px"> -->
 									</form>  
 								</div>
 								<button type="submit" class="submit-search">Search</button>
@@ -108,17 +106,23 @@
 			});
 			
 			$(function() {
+				var priceRange = {
+												0: "Most affordable",
+												25: "Affordable",
+												50: "Expensive",
+												75: "Most expensive"
+											};
 				$("#price-range").slider({
 				range: true,
 				min: 0,
-				max: 300,
-				values: [ 10, 100 ],
+				max: 75,
+				step: 25,
+				values: [ 25, 50 ],
 				slide: function( event, ui ) {
-					$( "#price" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+					$( "#price" ).val( priceRange[ui.values[ 0 ]] + " - " + (priceRange[ui.values[ 1 ]]) );
 				}
 				});
-				$( "#price" ).val( "$" + $( "#price-range" ).slider( "values", 0 ) +
-				" - $" + $( "#price-range" ).slider( "values", 1 ) );
+				
 			});
 			
 			$(function() {
