@@ -31,7 +31,7 @@ body {
 }
 
 #home-container {
-	margin: 100px auto 0 auto;
+	margin: 50px auto 0 auto;
 }
 
 #login {
@@ -84,6 +84,11 @@ button.sign-in {
 	margin: 25px 0 25px 0;
 	background: #009fda;
 	color: white;
+}
+
+button.sign-in:hover {
+	background: white;
+	color: #009fda;
 }
 
 button.submit-search {
