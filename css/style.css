@@ -20,6 +20,7 @@ body {
 	font-weight: 900 !important;
 	text-transform: uppercase;
 	font-family: "Arial Black", Arial, sans-serif;
+	color: #009fda;
 }
 
 #home-container hgroup h2 {
@@ -81,6 +82,8 @@ button.sign-in, button.submit-search, button.more-options {
 
 button.sign-in {
 	margin: 25px 0 25px 0;
+	background: #009fda;
+	color: white;
 }
 
 button.submit-search {
