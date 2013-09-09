@@ -80,6 +80,24 @@ button.sign-in, button.submit-search, button.more-options {
 	height: 2em;
 }
 
+button.more-options {
+	background: #334145;
+	color: white;
+}
+
+button.more-options:hover {
+	color: #009fda;
+}
+
+button.submit-search {
+	background: #009fda;
+	color: white;
+}
+
+button.submit-search:hover {
+	color: #334145;
+}
+
 button.sign-in {
 	margin: 25px 0 25px 0;
 	background: #009fda;
