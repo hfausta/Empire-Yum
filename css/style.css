@@ -196,9 +196,17 @@ footer nav ul li a:hover {
 	background: #009fda !important;
 }
 
+<<<<<<< HEAD
 @media all and (min-width: 990px) and (max-width: 1155px) {
 	
 	button, label {
 		font-size: 1.2em !important;
 	}
+=======
+#map-canvas{
+	width: 100%;
+	height: 650px;
+	margin: 0;
+	border:1px solid;
+>>>>>>> dfb70f6d2d941579dee61dbceb8526c6ecd6f470
 }
