@@ -9,10 +9,24 @@
 /*======================================================= !global varibles =======================================================*/
 
 
-$(document).ready(function() {
+$(document).ready(function(event) {
+	
+	//Bind the submit event for the form to perform a text search, default behaviour will be prevented so page will not refresh
 	$('#searchForm').on('submit', function(event) {
 		event.preventDefault();
-		search();
+		textSearch();
+	});
+	
+	//Toggle search options, this sets a variable
+	$("button#advance").click(function() {
+		$("#advanced").slideToggle("slow");
+		if($("button#advance").html() == "more options") {
+			$("button#advance").html("less options");
+			advance = true;
+		} else {
+			$("button#advance").html("more options");
+			advance = false;
+		}
 	});
 });
 
@@ -36,9 +50,7 @@ function initialize() {
 					center: myPos
 				});
 				drawMyMarker();
-			},function() {
-				handleNoGeolocation(true);
-			});
+			},showError);
 	}else{
 	// Browser does not support Geolocation
 		handleNoGeolocation(false);
@@ -161,6 +173,44 @@ function handleNoGeolocation(errorFlag) {
 
        infowindow = new google.maps.InfoWindow(options);
        map.setCenter(options.position);
+}
+
+/*
+ * Error handler for browser/service error.
+ * As error occurs, error message will be generated accordingly, and then
+ * re-center the map to sydney
+*/
+function showError(error)
+{
+	map = new google.maps.Map(document.getElementById('map-canvas'), {
+		mapTypeId: google.maps.MapTypeId.ROADMAP,	//the default map type
+		zoom: 17,	//the default zoom level
+		center: new google.maps.LatLng(-33.867387,151.207629)
+	});
+	
+	var options = {
+               map: map,
+               position: new google.maps.LatLng(-33.867387,151.207629),		//re-center the map
+       };
+
+       infowindow = new google.maps.InfoWindow(options);
+       map.setCenter(options.position);
+	switch(error.code) 
+{
+case error.PERMISSION_DENIED:
+infowindow.setContent("User denied the request for Geolocation.");
+break;
+case error.POSITION_UNAVAILABLE:
+infowindow.setContent("Location information is unavailable.");
+break;
+case error.TIMEOUT:
+infowindow.setContent("The request to get user location timed out.");
+
+break;
+case error.UNKNOWN_ERROR:
+infowindow.setContent("An unknown error occurred.");
+break;
+}
 }
 
 /*======================================================= !search controls =======================================================*/
