@@ -102,7 +102,7 @@ function getRequest(){
 
 	var request;
 	if(!advance){
-	
+
 		//textSearch request object
 		request = {
 		location: myPos,	//default search location for textSearch
@@ -111,31 +111,81 @@ function getRequest(){
 		types: types,
 		};
 	}else{
-		var location = document.getElementById('location').value;
-		var radius = document.getElementById('radius').value;;
+		var location ;
+		if(document.getElementById('location').value==''){
+			location = myPos;
+		}else{
+			location = document.getElementById('location').value;
+		}
+		var radius = document.getElementById('radius').value.replace(' Km','')*1000;
 		if(document.getElementById('cuisine').value != ''){
 			query = document.getElementById('cuisine').value+' '+query;
 		}
 			var minprice=0;
 			var maxprice=4
-		switch(document.getElementById('cuisine').value) {
-			case "Most affordable - Most expensive":
-			var minprice=0;
-			var maxprice=4
-			break;
-			case "Most affordable - Most expensive":
-			var minprice=0;
-			var maxprice=4;
-			break;
-			case error.TIMEOUT:
-			infowindow.setContent("The request to get user location timed out.");
-
-			break;
-			case error.UNKNOWN_ERROR:
-			infowindow.setContent("An unknown error occurred.");
-			break;
+			var i = document.getElementById('price').value.indexOf('-');
+		if (i >= 0){		
+			switch(document.getElementById('price').value.substring(0,i)) {
+				case "Free ":
+				var minprice=0;
+				break;
+				case "Most affordable ":
+				var minprice=1;
+				break;
+				case "Affordable ":
+				var minprice=2;
+				break;
+				case "Expensive ":
+				var minprice=3;
+				break;
+			}
+			switch(document.getElementById('price').value.substring(i)) {
+				case "- Most affordable":
+				var maxprice=1;
+				break;
+				case "- Affordable":
+				var maxprice=2;
+				break;
+				case "- Expensive":
+				var maxprice=3;
+				break;
+				case "- Most expensive":
+				var maxprice=4;
+				break;
+			}
+		}else{
+			switch(document.getElementById('price').value) {
+				case "Free":
+				var minprice=0;
+				var maxprice=0;
+				break;
+				case "Most affordable":
+				var minprice=1;
+				var maxprice=1;
+				break;
+				case "Affordable":
+				var minprice=2;
+				var maxprice=2;
+				break;
+				case "Expensive":
+				var minprice=3;
+				var maxprice=3;
+				break;
+				case "Most expensive":
+				var minprice=4;
+				var maxprice=4;
+				break;
+			}
 		}
-		var opennow = document.getElementById('opennow').checked;
+		var opennow = document.getElementById('openToday').checked;
+		console.log("advance: "+advance);
+		console.log("location: "+location);
+			console.log("radius:" +radius);
+			console.log("keyword:" +query);
+			console.log("types:" +types);
+			console.log("openNow:" +opennow);
+			console.log("minprice:" +minprice);
+			console.log("maxprice:" +maxprice);
 		//neaybySearch request object
 		request = {
 			location: location,
@@ -143,9 +193,8 @@ function getRequest(){
 			keyword: query,
 			types: types,
 			openNow: opennow,
-			minprice: minprice,
-			maxprice: maxprice,
-			rankBy: google.maps.places.RankBy.DISTANCE
+			minPriceLevel: minprice,
+			maxPriceLevel: maxprice,
 		};
 	}
 	
