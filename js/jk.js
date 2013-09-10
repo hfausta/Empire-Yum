@@ -69,16 +69,30 @@ function search(){
 		navigator.geolocation.getCurrentPosition(
 			function(position){
 				myPos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-				// make a new request
-				var request = getRequest();
 				if (service == null) {
 					service = new google.maps.places.PlacesService(map);
 				}
+				// make a new request
+				var request;
 				// pass the request
 				if(!advance){
+					//textSearch with current location
+					request = getRequest(myPos);
 					service.textSearch(request, callback);
 				}else{
-					service.nearbySearch(request, callback);
+					if(document.getElementById('location').value==''){
+						request = getRequest(myPos);
+						service.nearbySearch(request, callback);
+					}else{
+						new google.maps.Geocoder().geocode({ 'address': document.getElementById('location').value},function(results, status){
+							if (status == google.maps.GeocoderStatus.OK) {
+								request = getRequest(results[0].geometry.location);
+								service.nearbySearch(request, callback);
+							} else {
+								showError(status);
+							}
+						});
+					}
 				}  
 			},showError
 		);
@@ -91,31 +105,23 @@ function search(){
 /*
  * returns the a request object accroding to user input
  */
-function getRequest(){
+function getRequest(location){
 	var query = 'food';
 	if(document.getElementById('keyword').value != ''){
 		query = document.getElementById('keyword').value+' '+query;
 	}
 	var types = ['bakery','food','bar','cafe','meal_delivery','meal_takeaway','night_club','restaurant'];
-	
-
-	var request;
 	if(!advance){
-
 		//textSearch request object
 		request = {
-		location: myPos,	//default search location for textSearch
+		location: location,
 		radius: '500',		//default search radius for textSearch:500
 		query: query,
 		types: types,
 		};
-	}else{
-		var location ;
-		if(document.getElementById('location').value==''){
-			location = myPos;
-		}else{
-			location = document.getElementById('location').value;
-		}
+	}else{		
+		//nearbySearch request Object	
+		
 		var radius = document.getElementById('radius').value.replace(' Km','')*1000;
 		if(document.getElementById('cuisine').value != ''){
 			query = document.getElementById('cuisine').value+' '+query;
@@ -177,14 +183,6 @@ function getRequest(){
 			}
 		}
 		var opennow = document.getElementById('openToday').checked;
-		console.log("advance: "+advance);
-		console.log("location: "+location);
-			console.log("radius:" +radius);
-			console.log("keyword:" +query);
-			console.log("types:" +types);
-			console.log("openNow:" +opennow);
-			console.log("minprice:" +minprice);
-			console.log("maxprice:" +maxprice);
 		//neaybySearch request object
 		request = {
 			location: location,
@@ -196,7 +194,6 @@ function getRequest(){
 			maxPriceLevel: maxprice,
 		};
 	}
-	
 return request; 
 }
 
