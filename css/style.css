@@ -6,12 +6,13 @@ body {
 	text-rendering: optimizeLegibility;
 }
 
-#map-canvas, #map-canvas-results {
+#map-canvas {
 	display: block;
 	margin-top: 8px;
 	height: 600px;
 	width: 100%;
 	overflow: hidden;
+	border:1px solid;
 }
 
 .container {
@@ -76,6 +77,15 @@ label {
 	font-weight: 900;
 	font-size: 1.5em;
 	text-transform: uppercase;
+}
+
+#open-text {
+	width: 95%;
+}
+
+#open-check {
+	width: 5%;
+	height: 15px;
 }
 
 button.sign-in, button.submit-search, button.more-options {
@@ -196,17 +206,22 @@ footer nav ul li a:hover {
 	background: #009fda !important;
 }
 
-<<<<<<< HEAD
-@media all and (min-width: 990px) and (max-width: 1155px) {
+.accordion-heading {
+	margin-top: 10px;
+}
+
+@media (max-width: 990px) {
 	
-	button, label {
-		font-size: 1.2em !important;
+	.search-form, #resultsList {
+		text-align: center;
 	}
-=======
-#map-canvas{
-	width: 100%;
-	height: 650px;
-	margin: 0;
-	border:1px solid;
->>>>>>> dfb70f6d2d941579dee61dbceb8526c6ecd6f470
+	
+	.accordion-inner {
+		text-align: left;
+	}
+	
+	#open-text, #open-check {
+		width: auto;
+	}
+	
 }
