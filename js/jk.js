@@ -102,9 +102,11 @@ function getRequest(){
 
 	var request;
 	if(!advance){
+	
+		//textSearch request object
 		request = {
-		location: myPos,
-		radius: '500',
+		location: myPos,	//default search location for textSearch
+		radius: '500',		//default search radius for textSearch:500
 		query: query,
 		types: types,
 		};
@@ -114,13 +116,16 @@ function getRequest(){
 		if(document.getElementById('cuisine').value != ''){
 			query = document.getElementById('cuisine').value+' '+query;
 		}
-		
+			var minprice=0;
+			var maxprice=4
 		switch(document.getElementById('cuisine').value) {
-			case error.PERMISSION_DENIED:
-			infowindow.setContent("User denied the request for Geolocation.");
+			case "Most affordable - Most expensive":
+			var minprice=0;
+			var maxprice=4
 			break;
-			case error.POSITION_UNAVAILABLE:
-			infowindow.setContent("Location information is unavailable.");
+			case "Most affordable - Most expensive":
+			var minprice=0;
+			var maxprice=4;
 			break;
 			case error.TIMEOUT:
 			infowindow.setContent("The request to get user location timed out.");
@@ -131,13 +136,16 @@ function getRequest(){
 			break;
 		}
 		var opennow = document.getElementById('opennow').checked;
+		//neaybySearch request object
 		request = {
-		location: location,
-		radius: radius,
-		keyword: query,
-		types: types,
-		openNow: opennow,
-		minprice: minprice
+			location: location,
+			radius: radius,
+			keyword: query,
+			types: types,
+			openNow: opennow,
+			minprice: minprice,
+			maxprice: maxprice,
+			rankBy: google.maps.places.RankBy.DISTANCE
 		};
 	}
 	
