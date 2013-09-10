@@ -39,6 +39,7 @@ $(document).ready(function(event) {
  */
 function initialize() {
 	infowindow = new google.maps.InfoWindow();
+	document.getElementById("map-canvas-results").style.height = "0px";
 	<!--- Construct and then draw the map --->
 	if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(
@@ -310,12 +311,12 @@ function clear() {
  */
 function prepareResults(results){
 	$("#results").html("");
-	$('#results').append('<div class="accordion" id="resultsList"></div>');
+	$('#results').append('<div class="accordion" id="resultsList"><label>Search Results</label></div>');
 	for(var i=0;i<results.length;i++){
 		var html = '';
 		html += '<div class="accordion-group">';
 		html += '<div class="accordion-heading">';
-		html += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#resultsList" href="#collapse-'+i+'" onclick="hideReviews('+i+')">';
+		html += '<a class="accordion-toggle" data-toggle="collapse" data-parent="#resultsList" href="#collapse-'+i+'" onclick="hideReviews('+i+')" style="font-size: 1.5em">';
 		html += (i+1)+'. '+results[i].name;
 		html += '</a>';
 		html += '</div>';
@@ -358,7 +359,9 @@ function listItemContent(place,index){
 	//name & icon
 	if (place.icon && place.name) {
 		var event = 'onclick="liEvent('+index+')"';
-		html += '<a href="#map-canvas" class="scrollDown" id="result-link-'+index+'"'+event+'>';
+		document.getElementById("map-canvas").style.display = "none";
+		document.getElementById("map-canvas-results").style.height = "600px";
+		html += '<a href="#map-canvas-results" class="scrollDown" id="result-link-'+index+'"'+event+'>';
 		html += '<img class="placeIcon" src="'+place.icon+'" style="float:right;vertical-align: top">';
 		html += '<h4>' + place.name + '</h4>';
 		html += '</a>';

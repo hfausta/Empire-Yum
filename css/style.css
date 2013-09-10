@@ -6,7 +6,7 @@ body {
 	text-rendering: optimizeLegibility;
 }
 
-#map-canvas {
+#map-canvas, #map-canvas-results {
 	display: block;
 	margin-top: 8px;
 	height: 600px;
