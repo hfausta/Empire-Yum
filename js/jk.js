@@ -182,7 +182,7 @@ function getRequest(location){
 				break;
 			}
 		}
-		var opennow = document.getElementById('openToday').checked;
+		var opennow = document.getElementById('open-check').checked;
 		//neaybySearch request object
 		request = {
 			location: location,
